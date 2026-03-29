@@ -9,6 +9,7 @@
     services.nixpkgs-update-notifier = {
       enable = lib.mkEnableOption "nixpkgs-update-notifier";
       username = lib.mkOption { type = lib.types.str; };
+      homeserver = lib.mkOption { type = lib.types.str; };
       passwordFile = lib.mkOption { type = lib.types.path; };
       dataDir = lib.mkOption {
         type = lib.types.path;
@@ -95,6 +96,7 @@
           ExecStart = toString [
             (lib.getExe pkgs.nixpkgs-update-notifier)
             "-matrix.username ${cfg.username}"
+            "-matrix.homeserver ${cfg.homeserver}"
             "-db ${cfg.dataDir}/data.db"
             (lib.optionalString (cfg.timers.update != null) "-timers.update ${cfg.timers.update}")
             (lib.optionalString (cfg.timers.jsblob != null) "-timers.jsblob ${cfg.timers.jsblob}")
