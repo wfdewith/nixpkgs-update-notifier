@@ -373,7 +373,7 @@ func findPackagesForHandle(ctx context.Context, handle string) ([]string, error)
 
 			return nil, err
 		}
-		mps = append(mps, v.(string))
+		mps = append(mps, regexes.NormalizeAttrPath(v.(string)))
 	}
 
 	// Create the right number of placeholders: "(?,?,?)"
